@@ -50,9 +50,11 @@ if (process.env.VERSION == 'v1') {
    //----------------- Creating the routes from here
    const AuthRoutes = require('./src/api/v1/routes/AuthRoutes') //auth routes
    const FlightRoutes = require('./src/api/v1/routes/FlightRoutes') //flight routes
+   const NotificationRoutes = require('./src/api/v1/routes/NotificationRoutes') //notifications routes
 
    app.use('/api/v1/auth',AuthRoutes);
    app.use('/api/v1/flight',FlightRoutes);
+   app.use('/api/v1/notification',NotificationRoutes);
 }
 
 app.get('/*', (req, res) => {
