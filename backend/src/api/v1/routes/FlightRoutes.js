@@ -8,7 +8,7 @@ const isAuthenticated = require('../middlewares/isAuthenticated'); //check is au
 
 
 //------------------ Start to create the routes related to the flights
-router.put('/updateStatus',isAuthenticated, FlightControllers.updateFlightStatus); //update flight status 
+router.post('/updateStatus',isAuthenticated, FlightControllers.updateFlightStatus); //update flight status 
 router.get('/get', FlightControllers.getAllFlights); //update flight status 
 
 

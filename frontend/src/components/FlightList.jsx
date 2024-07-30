@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getFlights } from '../services/APIService';
+import { getFlights, updateFlightStatus } from '../services/APIService';
 
 
 
@@ -28,8 +28,11 @@ import {
     useDisclosure,
     Heading,
     Spinner,
+    Select,
 } from '@chakra-ui/react'
 import NotificationForm from './NotificationForm';
+import { CONTANTS_FLIGHT_STATUS } from '../constant';
+import toast from 'react-hot-toast';
 
 
 const FlightList = () => {
@@ -38,11 +41,36 @@ const FlightList = () => {
     const { isOpen, onClose, onOpen } = useDisclosure();
 
     const [flights, setFlights] = useState([]);
+    const [form,setForm] = useState({flight_id:'', departure_gate:'', arrival_gate:'', actual_departure:'', actual_arrival:''})
+
+    //flight_id, status, departure_gate, arrival_gate, actual_departure, actual_arrival
     const [isFlightsLoading, setIsFlightsLoading] = useState(false);
     const [flightId,setFlightId] = useState(null);
     const [flightStatus,setFlightStatus] = useState('on-time');
     const [departureGate,setDepartureGate] = useState('');
     const [close,setClose] = useState(false)
+
+    const token = localStorage.getItem('token');
+
+    //-----------Function stuff
+    const handleStatusChange = async(e)=>{
+        const status = e.target.value;
+
+        setFlightStatus(status)
+
+        try {
+            const data = await updateFlightStatus(form,token,status);
+            if(!data || data?.success === false){
+                toast.error(data?.msg || "Error occured to change the status")
+                
+                return;
+            }
+            else toast.success(data?.msg);
+    
+        } catch (error) {
+           toast.error(error); 
+        }
+    }
 
 
     useEffect(() => {
@@ -66,10 +94,9 @@ const FlightList = () => {
 
     return (
         <div>
-            <h1>Flight Status</h1>
 
             {/* ------------------ Modal Component ---------------------------X */}
-            <Modal blockScrollOnMount={false} isOpen={isOpen} onClose={close && onClose}>
+            <Modal blockScrollOnMount={false} isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay />
                 <ModalContent>
                     <ModalHeader>Subscribe to get notify</ModalHeader>
@@ -120,7 +147,29 @@ const FlightList = () => {
                                         <Tr key={flight.flight_id}>
                                             <Td>{flight.flight_id}</Td>
                                             <Td>{flight.airline}</Td>
-                                            <Td>{flight.status}</Td>
+                                            <Td> {
+                                                
+                                                    token 
+                                                    ?
+                                                    <Box p={4}>
+                                                    <Select value={flightStatus} placeholder="Select Status" onChange={(e) =>{
+                                                        setForm({flight_id:flight?.flight_id,departure_gate:flight?.departure_gate,arrival_gate:flight?.arrival_gate,actual_arrival:flight?.actual_arrival,actual_departure:flight?.actual_departure})
+                                                        handleStatusChange(e);
+                                                    }}>
+                                                        {
+                                                            CONTANTS_FLIGHT_STATUS?.map(status =>
+                                                                <option value={status} key={status}>{status}</option>
+
+                                                            )
+                                                        }
+                                                      </Select>
+                                                  </Box>
+                                            
+                                                    : flight?.status
+                                                }
+
+
+                                            </Td>
                                             <Td>{flight.departure_gate}</Td>
                                             <Td>{flight.arrival_gate}</Td>
                                             <Td>{new Date(flight.scheduled_departure).toLocaleString()}</Td>
@@ -129,7 +178,7 @@ const FlightList = () => {
                                                 <Button onClick={()=>{
                                                     console.log('flightid ',flight?.flight_id)
                                                     setFlightId(flight?.flight_id)
-                                                    setFlightStatus(flight?.status)
+                                                    setFlightStatus(flightStatus ? flightStatus : flight?.status)
                                                     setDepartureGate(flight?.departure_gate)
                                                     onOpen()
                                                 }} colorScheme='blue' rounded={'full'}>Notify</Button>
