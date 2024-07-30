@@ -1,5 +1,4 @@
-# <h1 id="flight_onboard"> Flight On-Board <span>![GitHub package.json version](https://img.shields.io/github/package-json/v/Nik4Furi/flight_onboard)
-</span> </h1>
+# <h1 id="flight_onboard"> Flight On-Board  </h1>
 
 ### Completing the case-study of "Real Time Flight Status Notification"
 **Overview/UseCase**: The Flight Status Notification Web Application provides a convenient way for users to stay updated on the status of flights. Users can view a comprehensive list of flights and subscribe to receive email notifications about status updates, including delays, cancellations, and gate changes.
@@ -44,10 +43,18 @@
 ## <h2 id="demo" >Demo </h2>
 
 <p text-align=left>
-  <img src="" width="500" height="" alt="flight_onboard_home"/>
+
+
+  <img src="https://github.com/user-attachments/assets/0fd13599-bc7a-4351-9452-5e110ccba136" width="500" height="" alt="flight_onboard_home"/>
+
+   <img src="https://github.com/user-attachments/assets/4f139538-cdaf-4273-8c27-b18a8ca5c252" width="500" height="" alt="flight_onboard_home"/>
     
  </p>
- 
+
+ <p text-align=right>
+     <img src="https://github.com/user-attachments/assets/7bfba6b2-07be-47bf-961e-0fab9fea370c" width="500" height="" alt="flight_onboard_home"/>
+ </p>
+
 
 
 <a href="#flight_onboard">Go Home </a>
@@ -72,9 +79,7 @@
 
 Creating the small system desing, to explaing the compatibility of the case-study
 
-(Flight On-Board)[https://app.eraser.io/workspace/OMc8461Eaxnp8bJmx7pd?origin=share]
-
-
+![diagram-export-7-30-2024-4_07_18-PM](https://github.com/user-attachments/assets/3472bc6f-784d-445a-b957-5dc58a7715ea)
 
 <a href="#flight_onboard">Go Home </a>
 
