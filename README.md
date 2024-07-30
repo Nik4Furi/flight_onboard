@@ -51,9 +51,7 @@
     
  </p>
 
- <p text-align=right>
-     <img src="https://github.com/user-attachments/assets/7bfba6b2-07be-47bf-961e-0fab9fea370c" width="500" height="" alt="flight_onboard_home"/>
- </p>
+
 
 
 
