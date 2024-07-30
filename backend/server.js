@@ -47,7 +47,12 @@ app.use(express.urlencoded({ extended: false }))
 if (process.env.VERSION == 'v1') {
     console.log('v1')
 
-   
+   //----------------- Creating the routes from here
+   const AuthRoutes = require('./src/api/v1/routes/AuthRoutes') //auth routes
+   const FlightRoutes = require('./src/api/v1/routes/FlightRoutes') //flight routes
+
+   app.use('/api/v1/auth',AuthRoutes);
+   app.use('/api/v1/flight',FlightRoutes);
 }
 
 app.get('/*', (req, res) => {
