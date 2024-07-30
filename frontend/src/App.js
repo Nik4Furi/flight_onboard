@@ -1,24 +1,17 @@
 import React, { lazy, Suspense } from 'react';
-import {
-  ChakraProvider,
-  Box,
-  Text,
-  Link,
-  VStack,
-  Code,
-  Grid,
-  theme,
-} from '@chakra-ui/react';
-import { Logo } from './Logo';
+
 
 //-------------- Rotuers setup
 import {BrowserRouter,Route,Routes} from 'react-router-dom'
+import {Toaster} from 'react-hot-toast'
 
 //------------ Pages routes
 import Spinner from './components/SpinnerComp';
 const Home = lazy(() => import('./pages/HomePage'))
 const Login = lazy(() => import('./pages/LoginPage'))
 const Logout = lazy(() => import('./pages/LogoutPage'))
+
+
 
 function App() {
   return (
@@ -46,6 +39,7 @@ function App() {
 
 
       </Routes>
+      <Toaster />
     </BrowserRouter>
      
   );
